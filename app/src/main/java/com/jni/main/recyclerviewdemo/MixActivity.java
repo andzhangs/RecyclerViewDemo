@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,9 @@ public class MixActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private GridLayoutManager gridManager;
     private List<String> mList;
-    private MixAdapter mAdapter;
+//    private MixAdapter mAdapter;
+    private MultipleLayoutAdapter mAdapter;
+
     private Button btnAdditem,btnDeleteitem;
     private TextView etInputId;
     private int i=0;
@@ -55,7 +56,10 @@ public class MixActivity extends AppCompatActivity {
         gridManager = new GridLayoutManager(this, 1, RecyclerView.VERTICAL, false);
         mRecyclerView.setLayoutManager(gridManager);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new MixAdapter();
+
+//        mAdapter = new MixAdapter();
+
+        mAdapter=new MultipleLayoutAdapter(this,mList,false,gridManager);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -69,96 +73,99 @@ public class MixActivity extends AppCompatActivity {
         findViewById(R.id.btn_switchlayout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int size = mList.size();
-                isHostLayout = !isHostLayout;
-                if (isHostLayout) {
-                    if (size == 2) {
-                        gridManager.setSpanCount(1);
-                    } else if (size > 2 && size <= 5) {
-                        gridManager.setSpanCount(2);
-                    } else if (size > 5 && size <= 10) {
-                        gridManager.setSpanCount(3);
-                    }
-                    Log.i(TAG, "切换布局: 主讲");
-                    gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                        @Override
-                        public int getSpanSize(int position) {
-                            if (position == 0) {
-                                Log.i(TAG, "getSpanSize: "+gridManager.getSpanCount());
-                                return gridManager.getSpanCount();  // 独占一行：表示获取当前行的列数
-                            } else {
-                                return 1;  //只占一行中的一列
-                            }
-                        }
-                    });
-                } else {
-                    Log.i(TAG, "切换布局: 均等");
-                    if (size == 2) {
-                        gridManager.setSpanCount(1);
-                    } else if (size > 2 && size <= 10) {
-                        gridManager.setSpanCount(2);
-                    }
-                    gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                        @Override
-                        public int getSpanSize(int position) {
-                            return 1;  //只占一行中的一列
-                        }
-                    });
-                }
-                mAdapter.notifyDataSetChanged();
+                mAdapter.switchLayout();
+//                int size = mList.size();
+//                isHostLayout = !isHostLayout;
+//                if (isHostLayout) {
+//                    if (size == 2) {
+//                        gridManager.setSpanCount(1);
+//                    } else if (size > 2 && size <= 5) {
+//                        gridManager.setSpanCount(2);
+//                    } else if (size > 5 && size <= 10) {
+//                        gridManager.setSpanCount(3);
+//                    }
+//                    Log.i(TAG, "切换布局: 主讲");
+//                    gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//                        @Override
+//                        public int getSpanSize(int position) {
+//                            if (position == 0) {
+//                                Log.i(TAG, "getSpanSize: "+gridManager.getSpanCount());
+//                                return gridManager.getSpanCount();  // 独占一行：表示获取当前行的列数
+//                            } else {
+//                                return 1;  //只占一行中的一列
+//                            }
+//                        }
+//                    });
+//                } else {
+//                    Log.i(TAG, "切换布局: 均等");
+//                    if (size == 2) {
+//                        gridManager.setSpanCount(1);
+//                    } else if (size > 2 && size <= 10) {
+//                        gridManager.setSpanCount(2);
+//                    }
+//                    gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//                        @Override
+//                        public int getSpanSize(int position) {
+//                            return 1;  //只占一行中的一列
+//                        }
+//                    });
+//                }
+//                mAdapter.notifyDataSetChanged();
             }
         });
 
         btnAdditem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mList.size() < 10) {
-                    mList.add("第"+(i+1)+"个");
-                    int size = mList.size();
-                    if (isHostLayout) {
-                        if (size == 2) {
-                            gridManager.setSpanCount(1);
-                        } else if (size > 2 && size <= 5) {
-                            gridManager.setSpanCount(2);
-                        } else if (size > 5 && size <= 10) {
-                            gridManager.setSpanCount(3);
-                        }
-                    } else {
-                        if (size == 2) {
-                            gridManager.setSpanCount(1);
-                        } else if (size > 2 && size <= 10) {
-                            gridManager.setSpanCount(2);
-                        }
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    i++;
-                } else {
-                    Toast.makeText(MixActivity.this, "数量够了", Toast.LENGTH_SHORT).show();
-                }
+                mAdapter.addItem("哈哈哈");
+//                if (mList.size() < 10) {
+//                    mList.add("第"+(i+1)+"个");
+//                    int size = mList.size();
+//                    if (isHostLayout) {
+//                        if (size == 2) {
+//                            gridManager.setSpanCount(1);
+//                        } else if (size > 2 && size <= 5) {
+//                            gridManager.setSpanCount(2);
+//                        } else if (size > 5 && size <= 10) {
+//                            gridManager.setSpanCount(3);
+//                        }
+//                    } else {
+//                        if (size == 2) {
+//                            gridManager.setSpanCount(1);
+//                        } else if (size > 2 && size <= 10) {
+//                            gridManager.setSpanCount(2);
+//                        }
+//                    }
+//                    mAdapter.notifyDataSetChanged();
+//                    i++;
+//                } else {
+//                    Toast.makeText(MixActivity.this, "数量够了", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
         btnDeleteitem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = Integer.parseInt(etInputId.getText().toString());
-                mList.remove(position);
-                int size = mList.size();
-                if (isHostLayout) {
-                    if (size == 2) {
-                        gridManager.setSpanCount(1);
-                    } else if (size > 2 && size <= 5) {
-                        gridManager.setSpanCount(2);
-                    } else if (size > 5 && size <= 10) {
-                        gridManager.setSpanCount(3);
-                    }
-                } else {
-                    if (size == 2) {
-                        gridManager.setSpanCount(1);
-                    } else if (size > 2 && size <= 10) {
-                        gridManager.setSpanCount(2);
-                    }
-                }
-                mAdapter.notifyDataSetChanged();
+                mAdapter.deleteItem(position);
+//                mList.remove(position);
+//                int size = mList.size();
+//                if (isHostLayout) {
+//                    if (size == 2) {
+//                        gridManager.setSpanCount(1);
+//                    } else if (size > 2 && size <= 5) {
+//                        gridManager.setSpanCount(2);
+//                    } else if (size > 5 && size <= 10) {
+//                        gridManager.setSpanCount(3);
+//                    }
+//                } else {
+//                    if (size == 2) {
+//                        gridManager.setSpanCount(1);
+//                    } else if (size > 2 && size <= 10) {
+//                        gridManager.setSpanCount(2);
+//                    }
+//                }
+//                mAdapter.notifyDataSetChanged();
                 etInputId.setText("");
             }
         });
@@ -171,8 +178,7 @@ public class MixActivity extends AppCompatActivity {
         private DisplayMetrics metrics;
         @Override
         public HostViewHoder onCreateViewHolder(ViewGroup parent, int viewType) {
-            HostViewHoder holder=new HostViewHoder(LayoutInflater.from(MixActivity.this).inflate(R.layout.item,parent,false));
-            return holder;
+            return new HostViewHoder(LayoutInflater.from(MixActivity.this).inflate(R.layout.item,parent,false));
         }
 
         @Override

@@ -11,15 +11,23 @@ import android.widget.ListView;
 public class MainActivity extends ListActivity {
 
     private String[] mTitles = new String[]{
+            FullscreenActivity.class.getSimpleName(),
             AverageActivity.class.getSimpleName(),
             HostActivity.class.getSimpleName(),
-            MixActivity.class.getSimpleName()
+            MixActivity.class.getSimpleName(),
+            LandAverageActivity.class.getSimpleName(),
+            LandHostActivity.class.getSimpleName(),
+            RecyclerViewPagerActivity.class.getSimpleName()
     };
 
     private Class[] mActivities = new Class[]{
+            FullscreenActivity.class,
             AverageActivity.class,
             HostActivity.class,
             MixActivity.class,
+            LandAverageActivity.class,
+            LandHostActivity.class,
+            RecyclerViewPagerActivity.class
     };
 
     @Override

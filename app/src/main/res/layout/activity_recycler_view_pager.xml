@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gw.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:id="@+id/swipeBackLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:directionMode="left"
+      app:isSwipeFromEdge="true"
+      app:maskAlpha="125"
+      app:swipeBackFactor="0.5">
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+          <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+          <!--xmlns:tools="http://schemas.android.com/tools"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="match_parent"-->
+          <!--android:orientation="vertical">-->
+        <!--<com.jni.main.recyclerviewdemo.views.SwipeRefreshLayoutCompat-->
+            <!--android:id="@+id/swipeRefresh"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:auto_cycle="true"
+                        app:indicator_visibility="visible"
+                        app:pager_animation="Accordion"
+                        app:pager_animation_span="1100" />
+                    <com.daimajia.slider.library.Indicators.PagerIndicator
+                        android:id="@+id/custom_indicator2"
+                        style="@style/AndroidImageSlider_Corner_Oval_Orange"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        <!--</com.jni.main.recyclerviewdemo.views.SwipeRefreshLayoutCompat>-->
+
+    <!--</LinearLayout>-->
+
+</com.gw.swipeback.SwipeBackLayout>
